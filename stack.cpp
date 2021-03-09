@@ -1,63 +1,9 @@
 #include <iostream>
 #include <string>
+#include "StackClass.h"
+#include "StackClass.cpp"
 
 using namespace std;
-
-template <class T>
-class Stack{
-    private:
-        struct list {
-            T data;
-            struct list * next;
-        };
-        typedef struct stack {struct list *top;} stck;
-        stck *S;
-
-    public:
-        Stack(){
-            S = new stck;
-            S->top = NULL;
-        }
-        ~Stack(){
-            struct list *p;
-            while (S->top){
-                p = S->top;
-                S->top = p->next;
-                delete[] p;
-            }
-            delete[] S;
-        }
-        void makenull(){
-            struct list *p;
-            while (S->top){
-                p = S->top;
-                S->top = p->next;
-                delete[] p;
-            }
-        }
-        T top(){//return S->top ? (S->top->data) : 0;
-            if(S->top != NULL)
-                return S->top->data;
-            return 0;
-        }
-        T pop(){
-	        T a;
-	        struct list *p;
-	        p = S->top;
-	        a = p->data;
-	        S->top = p->next;
-	        delete[] p;
-	        return a;
-        }
-        void push(T a){
-	        struct list *p;
-	        p = new struct list;
-	        p->data = a;
-	        p->next = S->top;
-	        S->top = p;
-        }
-        bool empty(){return S->top == NULL;}
-};
 
 int prior(char a){
     if(a == '(') return 1;
