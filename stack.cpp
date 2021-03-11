@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include "StackClass.h"
 #include "StackClass.cpp"
 
 using namespace std;
