@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include "StackClass.cpp"
 
 using namespace std;
@@ -13,6 +14,13 @@ int prior(char a){
     return 0;
 }
 
+string oper(int a, int b, char op){
+    if(op == '+') return to_string(a + b);
+    else if(op == '-') return to_string(b - a);
+    else if(op == '*') return to_string(a * b);
+    return to_string(b / a);
+}
+
 int main(){
     string lin, lout;
     Stack<char> S;
@@ -20,17 +28,20 @@ int main(){
     for(int i = 0; i < lin.length(); i++){
         if(!prior(lin[i])){
             lout.push_back(lin[i]);
+            // lout.push_back(' ');
         }
         else if(lin[i] == '('){
             S.push('(');
         }
         else if(lin[i] == ')'){
+            lout.push_back(' ');
             while(S.top() != '('){
                 lout.push_back(S.pop());
             }
             S.pop();
         }
         else{
+            lout.push_back(' ');
             while(!S.empty() && prior(S.top()) >= prior(lin[i])){
                 lout.push_back(S.pop());
             }
@@ -38,7 +49,27 @@ int main(){
         }
     }
     while(!S.empty()){
+        lout.push_back(' ');
         lout.push_back(S.pop());
     }
-    cout << lout;
+    cout << lout << endl;
+    S.makenull();
+    
+    Stack<char*> Q;
+    for(int i = 0; i < lout.length(); i++){
+        if(lout[i] != ' '){
+            if(!prior(lout[i])){
+                Q.push(&lout[i]);
+            }
+            else{
+                string a = Q.pop();
+                string b = Q.pop();
+                string op = oper(stoi(a), stoi(b), lout[i]);
+                char* cstr = new char[op.length() + 1];
+                strcpy(cstr, op.c_str());
+                Q.push(cstr);
+            }
+        }
+    }
+    cout << Q.pop() << endl;
 }
