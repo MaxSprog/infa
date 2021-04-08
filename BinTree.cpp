@@ -19,21 +19,19 @@ void BinTree::print_tree(){
 
 
 void BinTree::add(string a){
-    cout << "add\n";
 	if(Tr->data == ""){
         Tr->data = a;
-        return;
     }
-    if(Tr->data > a){
+    else if(Tr->data > a){
         if(!Tr->lt){
             Tr->lt = new tree;
             Tr->lt->data = a;
             Tr->lt->lt = NULL;
             Tr->lt->rt = NULL;
-            cout << "+1 to left(" << Tr->lt->data << ")\n";
-            return;
         }
-        push(Tr->lt, a);
+        else{
+            push(Tr->lt, a);
+        }
     }
     else{
         if(!Tr->rt){
@@ -41,9 +39,9 @@ void BinTree::add(string a){
             Tr->rt->data = a;
             Tr->rt->lt = NULL;
             Tr->rt->rt = NULL;
-            cout << "+1 to right(" << Tr->rt->data << ")\n";
-            return;
         }
-        push(Tr->rt, a);
+        else{
+            push(Tr->rt, a);
+        }
     }
 }

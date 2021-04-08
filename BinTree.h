@@ -14,11 +14,14 @@ class BinTree{
         }tree;
         void freejoint(struct node* right, struct node* left){
             struct node* rr = right->rt, *rl = right->lt, *lr = left->rt, *ll = left->lt;
-            delete[] right;
-            delete[] left;
+            delete right;
+            delete left;
             if(rr == NULL){
                 if(rl != NULL){
                     freehalfjoint(rl);
+                }
+                else{
+                    return;
                 }
             }
             else{
@@ -28,6 +31,9 @@ class BinTree{
                 if(ll != NULL){
                     freehalfjoint(ll);
                 }
+                else{
+                    return;
+                }
             }
             else{
                 freejoint(lr, ll);
@@ -35,11 +41,17 @@ class BinTree{
         }
         void freehalfjoint(struct node* stick){
             struct node* r = stick->rt, *l = stick->lt;
-            delete[] stick;
+            delete stick;
             if(r == NULL){
                 if(l != NULL){
                     freehalfjoint(l);
                 }
+                else{
+                    return;
+                }
+            }
+            else if(l == NULL){
+                freehalfjoint(r);
             }
             else{
                 freejoint(r, l);
@@ -52,17 +64,14 @@ class BinTree{
 	        print(t->rt);
         }
         void push(tree* p, string a){
-            cout << "ok.\n";
             if(p->data > a){
                 if(!p->lt){
                     p->lt = new tree;
                     p->lt->data = a;
                     p->lt->lt = NULL;
                     p->lt->rt = NULL;
-                    cout << "+1 to left(" << p->lt->data << ")\n";
                     return;
                 }
-                cout << "k.\n";
                 push(p->lt, a);
             }
             else{
@@ -71,10 +80,8 @@ class BinTree{
                     p->rt->data = a;
                     p->rt->lt = NULL;
                     p->rt->rt = NULL;
-                    cout << "+1 to right(" << p->rt->data << ")\n";
                     return;
                 }
-                cout << "k.\n";
                 push(p->rt, a);
             }
         }

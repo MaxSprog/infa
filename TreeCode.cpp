@@ -3,7 +3,7 @@
 int main(){
     BinTree tree;
     tree.add("c");
-    //tree.add("a");
-    //tree.add("b");
-    //tree.print_tree();
+    tree.add("a");
+    tree.add("b");
+    tree.print_tree();
 }
