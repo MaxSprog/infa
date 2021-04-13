@@ -8,7 +8,7 @@ BinTree::BinTree(){
 }
 
 BinTree::~BinTree(){
-    freehalfjoint(Tr);
+    free(Tr);
 }
 
 void BinTree::print_tree(){
@@ -44,4 +44,24 @@ void BinTree::add(string a){
             push(Tr->rt, a);
         }
     }
+}
+
+void BinTree::print_prefix(){
+	cout << Tr->data << " ";
+	prefix(Tr->lt);
+	prefix(Tr->rt);
+    cout << endl;
+}
+
+void BinTree::print_postfix(){
+	postfix(Tr->lt);
+	postfix(Tr->rt);
+	cout << Tr->data << endl;
+}
+
+void BinTree::print_infix(){
+	infix(Tr->lt);
+	cout << Tr->data << " ";
+	infix(Tr->rt);
+    cout << endl;
 }

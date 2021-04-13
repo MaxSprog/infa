@@ -12,50 +12,12 @@ class BinTree{
             struct node* rt;
             struct node* lt;
         }tree;
-        void freejoint(struct node* right, struct node* left){
-            struct node* rr = right->rt, *rl = right->lt, *lr = left->rt, *ll = left->lt;
-            delete right;
-            delete left;
-            if(rr == NULL){
-                if(rl != NULL){
-                    freehalfjoint(rl);
-                }
-                else{
-                    return;
-                }
-            }
-            else{
-                freejoint(rr, rl);
-            }
-            if(lr == NULL){
-                if(ll != NULL){
-                    freehalfjoint(ll);
-                }
-                else{
-                    return;
-                }
-            }
-            else{
-                freejoint(lr, ll);
-            }
-        }
-        void freehalfjoint(struct node* stick){
-            struct node* r = stick->rt, *l = stick->lt;
-            delete stick;
-            if(r == NULL){
-                if(l != NULL){
-                    freehalfjoint(l);
-                }
-                else{
-                    return;
-                }
-            }
-            else if(l == NULL){
-                freehalfjoint(r);
-            }
-            else{
-                freejoint(r, l);
-            }
+        void free(struct node* leaf){
+            if(!leaf) return;
+            struct node* lt = leaf->lt, *rt = leaf->rt;
+            delete leaf;
+            free(lt);
+            free(rt);
         }
         void print(tree *t){
             if (!t) return;
@@ -85,6 +47,24 @@ class BinTree{
                 push(p->rt, a);
             }
         }
+        void prefix(tree* p){
+            if (!p) return;
+            cout << p->data << " ";
+	        prefix(p->lt);
+	        prefix(p->rt);
+        }
+        void postfix(tree* p){
+            if (!p) return;
+	        postfix(p->lt);
+	        postfix(p->rt);
+            cout << p->data << " ";
+        }
+        void infix(tree* p){
+            if (!p) return;
+	        infix(p->lt);
+            cout << p->data << " ";
+	        infix(p->rt);
+        }
 
     public:
         tree* Tr;
@@ -92,4 +72,7 @@ class BinTree{
         ~BinTree();
         void print_tree();
         void add(string a);
+        void print_prefix();
+        void print_postfix();
+        void print_infix();
 };
