@@ -10,7 +10,7 @@ int MaxICol(int m, int** arr, int i){
             k = j;
         }
     }
-    return M != 0 ? k : -1;
+    return M > 0 ? k : -1;
 }
 
 int Sum(int m, int* arr){
@@ -41,9 +41,8 @@ int main(){
             cin >> aut[i][j];
         }
     }
-
     for(int i = 0; i < M; i++){
-        int a = MaxICol(M, act, i), b = MaxICol(M, aut, i);
+        int a = MaxICol(N, act, i), b = MaxICol(N, aut, i);
         if(a == b && a != -1){
             kd[a]++;
         }
