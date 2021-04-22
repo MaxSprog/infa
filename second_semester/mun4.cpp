@@ -62,6 +62,5 @@ int main(){
     for(int i = 0; i < N; i++){
         if(lvl[i] == M)
             cout << i + 1 << " ";
-        // cout << "cringe: " << lvl[i] << " ";
     }
 }

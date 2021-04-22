@@ -1,14 +1,14 @@
 #include <stdio.h>
 
 void erat(int n){
-    int a[n+1];
+    int a[n + 1];
     for (int i = 0; i <= n; i++)
         a[i] = 1;
 
-    for (int i = 2; i*i <= n; i++){
-        if (a[i]){
+    for (int i = 2; i * i <= n; i++){
+        if(a[i]){
             int j = 0, k = 0;
-            for (int j = i*i; j<=n; j+=i)
+            for (int j = i * i; j <= n; j += i)
                 a[j] = 0;            
         }
     }
