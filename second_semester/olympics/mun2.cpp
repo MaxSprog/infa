@@ -41,8 +41,10 @@ int main(){
             cin >> aut[i][j];
         }
     }
+    cout << endl;
     for(int i = 0; i < M; i++){
         int a = MaxICol(N, act, i), b = MaxICol(N, aut, i);
+        cout << a << " " << b << endl;
         if(a == b && a != -1){
             kd[a]++;
         }
