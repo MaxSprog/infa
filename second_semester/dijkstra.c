@@ -1,62 +1,46 @@
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int min(int x, int n, int* arr){
-    int m = arr[x], ind = x;
-    for(int i = x; i < n; i++){
-        if(m > arr[i]){
-            m = arr[i];
-            ind = i;
-        }
-    }
-    return ind;
+#define N 1000
+
+void swap(double* a, double* b){
+    double c = *a;
+    *a = *b;
+    *b = c;
 }
 
-void select(int n, int st, int* arr){
-    int b = 0, k = 0;
-    for(int i = st; i < n - 1; i++){
-        k = min(i, n, arr);
-        if(k != i){
-            b = arr[k];
-            arr[k] = arr[i];
-            arr[i] = b;
+bool next_perm(int n, double* A){
+    int i = n-1;
+    for(; i > 0; i--){
+        if(A[i-1] < A[i]) break;
+        else if(i - 1 == 0) return false;
+    }
+    int m = i-1;
+    for(int j = i; j < n; j++){
+        if(A[j] > A[m]){
+            m = j;
         }
     }
-}
-
-void printarr(int n, int* arr){
-    for(int i = 0; i < n; i++){
-        printf("%d ", arr[i]);
+    swap(&A[i-1], &A[m]);
+    for(int j = i; j < i + (n - i) / 2; j++){
+        swap(&A[j], &A[n - j + i - 1]);
     }
-    printf("\n");
+    return true;
 }
 
 int main(){
-    int n = 0, k = 0, min = 0, i_min = 0;
+    int n;
     scanf("%d", &n);
-    int* M = calloc(n, sizeof(int));
+    double* arr = calloc(n, sizeof(double));
     for(int i = 0; i < n; i++){
-        scanf("%d", &M[i]);
+        scanf("%d", &arr[i]);
     }
-    for(int i = n-1; i > 0; i--){
-        if(M[i-1] < M[i]){
-            k = i;
-            break;
-        }
+    printf("%d\n", next_perm(n, arr));
+    for(int i = 0; i < n; i++){
+        printf("%d ", arr[i]);
     }
-    min = M[k];
-    for(int i = k; i < n; i++){
-        if(M[i] > M[n]){
-            if(M[i] < min){
-                i_min = i;
-                min = M[i];
-            }
-        }
-    }
-    int p = M[i_min - 1];
-    M[i_min - 1] = M[k - 1];
-    M[k - 1] = p;
-    select(n, k, M);
-    printarr(n, M);
     return 0;
 }
+//1 2 5 6 4 3
+//1 2 6 3 4 5
