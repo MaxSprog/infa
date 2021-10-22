@@ -15,8 +15,8 @@ void printarr(int n, int m, int** arr){
 }
 
 int main(){
-    string s1 = "abcabba";
-    string s2 = "baca";
+    string s1 = "123";
+    string s2 = "231";
     int n1 = s1.length() + 1;
     int n2 = s2.length() + 1;
     int** arr = (int**)malloc(n1 * sizeof(int*));
@@ -29,6 +29,7 @@ int main(){
     for(int i = 0; i < n2; i++){
         arr[0][i] = i;
     }
+    printarr(n1, n2, arr);
     for(int i = 1; i <= n1; i++){
         for(int j = 1; j <= n2; j++){
             if(s1[i] != s2[j]){
@@ -45,5 +46,4 @@ int main(){
     while(i > 0 || j > 0){
         if(M[i][j] )
     }*/
-    return 0;
 }

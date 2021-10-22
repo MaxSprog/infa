@@ -69,7 +69,6 @@ int main()
     {
         for (int j = i+1; j < n; j++)
         {
-            if(i == j) continue;
             vector<double> arr(2);
             if(crds[i][1] - crds[j][1] == 0){
                 arr = {10001, (double)(crds[i][0] * crds[j][1] - crds[j][0] * crds[i][1]) / (double)(crds[i][0] - crds[j][0])};

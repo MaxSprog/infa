@@ -32,7 +32,7 @@ int* insertion(int n, int arr[]){
         while(j > 0 && arr[j] < arr[j - 1]){
             b = arr[j];
             arr[j] = arr[j - 1];
-            arr[j - 1] = arr[j];
+            arr[j - 1] = b;
             j--;
         }
     }
