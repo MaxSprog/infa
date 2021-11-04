@@ -1,26 +1,29 @@
 #include "BinTree.h"
 
+template<class T>
 BinTree::BinTree(){
-    Tr = new tree;
-    Tr->data = "";
-    Tr->rt = NULL;
-    Tr->lt = NULL;
+    Tr = NULL;
 }
 
+template<class T>
 BinTree::~BinTree(){
     free(Tr);
 }
 
+template<class T>
 void BinTree::print_tree(){
 	print(Tr->lt);
 	cout << Tr->data << endl;
 	print(Tr->rt);
 }
 
-
-void BinTree::add(string a){
-	if(Tr->data == ""){
+template<class T>
+void BinTree::add(T a){
+	if(!Tr){
+        Tr = new tree;
         Tr->data = a;
+        Tr->lt = NULL;
+        Tr->rt = NULL;
     }
     else if(Tr->data > a){
         if(!Tr->lt){
@@ -46,6 +49,7 @@ void BinTree::add(string a){
     }
 }
 
+template<class T>
 void BinTree::print_prefix(){
 	cout << Tr->data << " ";
 	prefix(Tr->lt);
@@ -53,12 +57,14 @@ void BinTree::print_prefix(){
     cout << endl;
 }
 
+template<class T>
 void BinTree::print_postfix(){
 	postfix(Tr->lt);
 	postfix(Tr->rt);
 	cout << Tr->data << endl;
 }
 
+template<class T>
 void BinTree::print_infix(){
 	infix(Tr->lt);
 	cout << Tr->data << " ";

@@ -1,14 +1,12 @@
-#pragma once
-#include <cstddef>
+#include <string>
 #include <iostream>
 
 using namespace std;
 
-template<class T>
 class BinTree{
     private:
         typedef struct node {
-            T data;
+            string data;
             struct node* rt;
             struct node* lt;
         }tree;
@@ -25,7 +23,7 @@ class BinTree{
 	        cout << t->data << endl;
 	        print(t->rt);
         }
-        void push(tree* p, T a){
+        void push(tree* p, string a){
             if(p->data > a){
                 if(!p->lt){
                     p->lt = new tree;
@@ -36,7 +34,7 @@ class BinTree{
                 }
                 push(p->lt, a);
             }
-            else{
+            else if(p->data < a){
                 if(!p->rt){
                     p->rt = new tree;
                     p->rt->data = a;
@@ -68,11 +66,54 @@ class BinTree{
         tree* Tr;
 
     public:
-        BinTree();
-        ~BinTree();
-        void print_tree();
-        void add(T a);
-        void print_prefix();
-        void print_postfix();
-        void print_infix();
+        BinTree(){
+            Tr = new tree;
+            Tr->data = "";
+            Tr->rt = NULL;
+            Tr->lt = NULL;
+        }
+        ~BinTree(){
+            free(Tr);
+        }
+        void print_tree(){
+            print(Tr->lt);
+            cout << Tr->data << endl;
+            print(Tr->rt);
+        }
+        void add(string a){
+            if(Tr->data == ""){
+                Tr->data = a;
+            }
+            else if(Tr->data > a){
+                if(!Tr->lt){
+                    Tr->lt = new tree;
+                    Tr->lt->data = a;
+                    Tr->lt->lt = NULL;
+                    Tr->lt->rt = NULL;
+                }
+                else{
+                    push(Tr->lt, a);
+                }
+            }
+            else if(Tr->data < a){
+                if(!Tr->rt){
+                    Tr->rt = new tree;
+                    Tr->rt->data = a;
+                    Tr->rt->lt = NULL;
+                    Tr->rt->rt = NULL;
+                }
+                else{
+                    push(Tr->rt, a);
+                }
+            }
+        }
 };
+
+int main(){
+    BinTree tree;
+    string s;
+    while(cin >> s){
+        tree.add(s);
+    }
+    tree.print_tree();
+}
