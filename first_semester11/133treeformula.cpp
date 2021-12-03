@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <stack>
 
 using namespace std;
 
@@ -8,11 +7,10 @@ bool is_num(char c){
     return ('0' <= c && c <= '9');
 }
 
-template <class T>
 class BinTree{
     private:
         typedef struct node {
-            T data;
+            char data;
             struct node* rt;
             struct node* lt;
             struct node* parent;
@@ -31,7 +29,7 @@ class BinTree{
 	        cout << t->data << endl;
 	        print(t->rt);
         }
-        void push(tree* p, T a){
+        void push(tree* p, char a){
             if(!p->lt || !is_num(p->lt->data)){
                 if(!p->lt){
                     p->lt = new tree;
@@ -80,18 +78,18 @@ class BinTree{
         }
         string div(int a, int b){
             if(!b){
-                return "No";
+                return "NO";
             }
             return to_string(a / b);
         }
         string comp(tree* p){
             if(!p)
-                return "No";
+                return "NO";
             if(is_num(p->data))
                 return string(1, p->data);
             string a = comp(p->lt), b = comp(p->rt);
-            if(a == "No" || b == "No")
-                return "No";
+            if(a == "NO" || b == "NO")
+                return "NO";
             int x = stoi(a), y = stoi(b);
             switch(p->data){
                 case '*':
@@ -125,7 +123,7 @@ class BinTree{
             cout << Tr->data << endl;
             print(Tr->rt);
         }
-        void add(T a){
+        void add(char a){
             inserted = false;
             if(!Tr){
                 Tr = new tree;
@@ -176,22 +174,22 @@ class BinTree{
         }
         string compute(){
             if(!Tr)
-                return "No";
+                return "NO";
             if(is_num(Tr->data))
                 return string(1, Tr->data);
             string a = comp(Tr->lt), b = comp(Tr->rt);
-            if(a == "No" || b == "No")
-                return "No";
+            if(a == "NO" || b == "NO")
+                return "NO";
             int x = stoi(a), y = stoi(b);
             switch(Tr->data){
                 case '*':
-                    return to_string(x * y);
+                    return to_string((int)(x * y));
                     break;
                 case '+':
-                    return to_string(x + y);
+                    return to_string((int)(x + y));
                     break;
                 case '-':
-                    return to_string(x - y);
+                    return to_string((int)(x - y));
                     break;
                 case '/':
                     return div(x, y);
@@ -204,7 +202,7 @@ class BinTree{
 };
 
 int main(){
-    BinTree<char> tree;
+    BinTree tree;
     char c;
     while(cin >> c){
         tree.add(c);
