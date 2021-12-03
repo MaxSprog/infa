@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <climits>
 using namespace std;
-#define MAXLEN 201
 
 int main(){
     int n, m;
@@ -30,7 +30,7 @@ int main(){
     vector<pair<int, int>> itr = {make_pair(-1, 0), make_pair(0, -1), make_pair(0, 1), make_pair(1, 0)};
     queue<pair<int, int>> Q;
     vector<vector<bool>> seen(n, vector<bool>(m, false));
-    vector<vector<int>> dist(n, vector<int>(m, MAXLEN));
+    vector<vector<int>> dist(n, vector<int>(m, SHRT_MAX));
     dist[start.first][start.second] = 0;
     pair<int, int> p;
     Q.push(start);
@@ -52,7 +52,7 @@ int main(){
             }
         }
     }
-    if(dist[end.first][end.second] == MAXLEN){
+    if(dist[end.first][end.second] == SHRT_MAX){
         cout << -1 << endl;
     }
     else{
